@@ -73,7 +73,7 @@
         }
 
         .header-content {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             display: flex;
             flex-wrap: wrap;
@@ -117,82 +117,93 @@
         }
 
         .main-container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 2rem auto;
             padding: 0 1.5rem;
         }
 
-        /* ポジションセクション */
-        .position-section {
-            margin-bottom: 3rem;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid var(--samurai-gold);
-            padding-left: 1rem;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-
-        .section-count {
-            background-color: var(--samurai-gold);
-            color: #0a1428;
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-
-        /* グリッド: 3列 */
-        .players-grid {
+        /* 3カラムレイアウト */
+        .three-columns {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.8rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            align-items: start;
         }
 
-        /* デスクトップで3列固定 */
-        @media (min-width: 1024px) {
-            .players-grid {
-                grid-template-columns: repeat(3, 1fr);
+        /* スマホでは1列 */
+        @media (max-width: 900px) {
+            .three-columns {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
         }
 
-        .player-card {
-            background-color: var(--bg-card);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* ポジション内グループ */
+        .position-group {
+            background-color: var(--bg-secondary);
+            border-radius: 24px;
+            padding: 1.2rem;
             border: 1px solid var(--border);
         }
 
-        .player-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+        .group-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--samurai-gold);
         }
 
-        /* 監督カード用の特別スタイル */
+        .group-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .group-count {
+            background-color: var(--samurai-gold);
+            color: #0a1428;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* カードスタイル */
+        .player-card {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid var(--border);
+            margin-bottom: 1rem;
+        }
+
+        .player-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
         .player-card.coach-card {
             border-top: 3px solid var(--coach-badge);
         }
 
         .card-img {
             width: 100%;
-            height: 180px;
+            height: 160px;
             overflow: hidden;
             background: linear-gradient(135deg, var(--samurai-blue), var(--bg-secondary));
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
         }
 
         .card-img img {
@@ -203,7 +214,7 @@
         }
 
         .card-img .no-image {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: bold;
             color: var(--samurai-gold);
             background: rgba(0,0,0,0.5);
@@ -212,11 +223,11 @@
         }
 
         .player-info {
-            padding: 1.2rem;
+            padding: 1rem;
         }
 
         .player-name {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: bold;
             display: flex;
             justify-content: space-between;
@@ -225,18 +236,18 @@
         }
 
         .player-name-en {
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             font-weight: normal;
             color: var(--text-secondary);
         }
 
         .player-pos {
             display: inline-block;
-            padding: 0.2rem 0.6rem;
+            padding: 0.15rem 0.5rem;
             border-radius: 20px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: bold;
-            margin-top: 0.5rem;
+            margin-top: 0.4rem;
         }
 
         .pos-gk { background-color: var(--gk-badge); color: white; }
@@ -246,9 +257,9 @@
         .pos-coach { background-color: var(--coach-badge); color: white; }
 
         .player-club {
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
-            margin-top: 0.5rem;
+            margin-top: 0.4rem;
         }
 
         /* 詳細画面 */
@@ -344,7 +355,7 @@
         }
 
         .footer-content {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
@@ -405,46 +416,42 @@
         };
 
         // ==================== 選手データ ====================
-        const PLAYERS = [
-            // GK
-            { num:1, nameJa:"鈴木 彩艶", nameEn:"Zion Suzuki", posCode:"GK", posJa:"ゴールキーパー", posEn:"Goalkeeper", clubJa:"パルマ (イタリア)", clubEn:"Parma (Italy)", prefectureJa:"埼玉県", prefectureEn:"Saitama", prevClubJa:"シント＝トロイデン", prevClubEn:"Sint-Truiden", youthJa:"浦和レッズユース", youthEn:"Urawa Reds Youth", jleagueJa:"浦和レッズ", jleagueEn:"Urawa Reds", imageUrl:"images/players/1.jpg" },
-            { num:12, nameJa:"大迫 敬介", nameEn:"Keisuke Osako", posCode:"GK", posJa:"ゴールキーパー", posEn:"Goalkeeper", clubJa:"サンフレッチェ広島", clubEn:"Sanfrecce Hiroshima", prefectureJa:"鹿児島県", prefectureEn:"Kagoshima", prevClubJa:"広島ユース昇格", prevClubEn:"Promoted from Youth", youthJa:"サンフレッチェ広島ユース", youthEn:"Sanfrecce Hiroshima Youth", jleagueJa:"サンフレッチェ広島", jleagueEn:"Sanfrecce Hiroshima", imageUrl:"images/players/12.jpg" },
-            { num:23, nameJa:"早川 友基", nameEn:"Tomoki Hayakawa", posCode:"GK", posJa:"ゴールキーパー", posEn:"Goalkeeper", clubJa:"鹿島アントラーズ", clubEn:"Kashima Antlers", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"ギラヴァンツ北九州", prevClubEn:"Giravanz Kitakyushu", youthJa:"桐蔭学園高校", youthEn:"Toin Gakuen HS", jleagueJa:"鹿島アントラーズ、ギラヴァンツ北九州", jleagueEn:"Kashima Antlers, Giravanz", imageUrl:"images/players/23.jpg" },
-            // DF
-            { num:5, nameJa:"長友 佑都", nameEn:"Yuto Nagatomo", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"FC東京", clubEn:"FC Tokyo", prefectureJa:"愛媛県", prefectureEn:"Ehime", prevClubJa:"ガンバ大阪", prevClubEn:"Gamba Osaka", youthJa:"東福岡高校", youthEn:"Higashi Fukuoka HS", jleagueJa:"FC東京、東京ヴェルディ、ガンバ大阪", jleagueEn:"FC Tokyo, Tokyo Verdy, Gamba Osaka", imageUrl:"images/players/5.jpg" },
-            { num:3, nameJa:"谷口 彰悟", nameEn:"Shogo Taniguchi", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"シント＝トロイデン", clubEn:"Sint-Truiden", prefectureJa:"熊本県", prefectureEn:"Kumamoto", prevClubJa:"川崎フロンターレ", prevClubEn:"Kawasaki Frontale", youthJa:"大津高校", youthEn:"Ozu HS", jleagueJa:"川崎フロンターレ", jleagueEn:"Kawasaki Frontale", imageUrl:"images/players/3.jpg" },
-            { num:4, nameJa:"板倉 滉", nameEn:"Ko Itakura", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"アヤックス", clubEn:"Ajax", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"ボルシアMG", prevClubEn:"Borussia M'gladbach", youthJa:"川崎フロンターレU-18", youthEn:"Kawasaki Frontale U-18", jleagueJa:"川崎フロンターレ、ベガルタ仙台", jleagueEn:"Kawasaki Frontale, Vegalta Sendai", imageUrl:"images/players/4.jpg" },
-            { num:16, nameJa:"渡辺 剛", nameEn:"Tsuyoshi Watanabe", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"フェイエノールト", clubEn:"Feyenoord", prefectureJa:"埼玉県", prefectureEn:"Saitama", prevClubJa:"FC東京", prevClubEn:"FC Tokyo", youthJa:"山梨学院大学附属高校", youthEn:"Yamanashi Gakuin HS", jleagueJa:"FC東京", jleagueEn:"FC Tokyo", imageUrl:"images/players/16.jpg" },
-            { num:22, nameJa:"冨安 健洋", nameEn:"Takehiro Tomiyasu", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"アヤックス", clubEn:"Ajax", prefectureJa:"福岡県", prefectureEn:"Fukuoka", prevClubJa:"アーセナル", prevClubEn:"Arsenal", youthJa:"アビスパ福岡U-18", youthEn:"Avispa Fukuoka U-18", jleagueJa:"アビスパ福岡", jleagueEn:"Avispa Fukuoka", imageUrl:"images/players/22.jpg" },
-            { num:21, nameJa:"伊藤 洋輝", nameEn:"Hiroki Ito", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"バイエルン・ミュンヘン", clubEn:"Bayern Munich", prefectureJa:"静岡県", prefectureEn:"Shizuoka", prevClubJa:"シュツットガルト", prevClubEn:"VfB Stuttgart", youthJa:"ジュビロ磐田U-18", youthEn:"Jubilo Iwata U-18", jleagueJa:"ジュビロ磐田", jleagueEn:"Jubilo Iwata", imageUrl:"images/players/21.jpg" },
-            { num:2, nameJa:"菅原 由勢", nameEn:"Yukinari Sugawara", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"ヴェルダー・ブレーメン", clubEn:"Werder Bremen", prefectureJa:"愛知県", prefectureEn:"Aichi", prevClubJa:"AZアルクマール", prevClubEn:"AZ Alkmaar", youthJa:"名古屋グランパスU-18", youthEn:"Nagoya Grampus U-18", jleagueJa:"名古屋グランパス", jleagueEn:"Nagoya Grampus", imageUrl:"images/players/2.jpg" },
-            { num:20, nameJa:"瀬古 歩夢", nameEn:"Ayumu Seko", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"ル・アーヴル", clubEn:"Le Havre", prefectureJa:"大阪府", prefectureEn:"Osaka", prevClubJa:"グラスホッパー", prevClubEn:"Grasshopper", youthJa:"セレッソ大阪U-18", youthEn:"Cerezo Osaka U-18", jleagueJa:"セレッソ大阪", jleagueEn:"Cerezo Osaka", imageUrl:"images/players/20.jpg" },
-            { num:25, nameJa:"鈴木 淳之介", nameEn:"Junnosuke Suzuki", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"FCコペンハーゲン", clubEn:"FC Copenhagen", prefectureJa:"岐阜県", prefectureEn:"Gifu", prevClubJa:"ブランビー", prevClubEn:"Brondby", youthJa:"帝京大学可児高校", youthEn:"Teikyo University Kani HS", jleagueJa:"湘南ベルマーレ", jleagueEn:"Shonan Bellmare", imageUrl:"images/players/25.jpg" },
-            // MF
-            { num:6, nameJa:"遠藤 航", nameEn:"Wataru Endo", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"リバプール", clubEn:"Liverpool", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"シュツットガルト", prevClubEn:"VfB Stuttgart", youthJa:"湘南ベルマーレユース", youthEn:"Shonan Bellmare Youth", jleagueJa:"湘南ベルマーレ、浦和レッズ", jleagueEn:"Shonan Bellmare, Urawa Reds", imageUrl:"images/players/6.jpg" },
-            { num:7, nameJa:"田中 碧", nameEn:"Ao Tanaka", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"リーズ・ユナイテッド", clubEn:"Leeds United", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"デュッセルドルフ", prevClubEn:"Fortuna Dusseldorf", youthJa:"川崎フロンターレU-18", youthEn:"Kawasaki Frontale U-18", jleagueJa:"川崎フロンターレ", jleagueEn:"Kawasaki Frontale", imageUrl:"images/players/7.jpg" },
-            { num:8, nameJa:"久保 建英", nameEn:"Takefusa Kubo", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"レアル・ソシエダ", clubEn:"Real Sociedad", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"レアル・マドリード", prevClubEn:"Real Madrid", youthJa:"FC東京U-18", youthEn:"FC Tokyo U-18", jleagueJa:"FC東京、横浜F・マリノス", jleagueEn:"FC Tokyo, Yokohama F.Marinos", imageUrl:"images/players/8.jpg" },
-            { num:10, nameJa:"堂安 律", nameEn:"Ritsu Doan", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"アイントラハト・フランクフルト", clubEn:"Eintracht Frankfurt", prefectureJa:"兵庫県", prefectureEn:"Hyogo", prevClubJa:"SCフライブルク", prevClubEn:"SC Freiburg", youthJa:"ガンバ大阪ユース", youthEn:"Gamba Osaka Youth", jleagueJa:"ガンバ大阪", jleagueEn:"Gamba Osaka", imageUrl:"images/players/10.jpg" },
-            { num:14, nameJa:"伊東 純也", nameEn:"Junya Ito", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"KRCヘンク", clubEn:"KRC Genk", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"ヘンク (継続)", prevClubEn:"Genk (continuing)", youthJa:"県立逗葉高校", youthEn:"Prefectural Zuyo HS", jleagueJa:"柏レイソル", jleagueEn:"Kashiwa Reysol", imageUrl:"images/players/14.jpg" },
-            { num:15, nameJa:"鎌田 大地", nameEn:"Daichi Kamada", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"クリスタル・パレス", clubEn:"Crystal Palace", prefectureJa:"愛媛県", prefectureEn:"Ehime", prevClubJa:"ラツィオ", prevClubEn:"Lazio", youthJa:"東山高校", youthEn:"Higashiyama HS", jleagueJa:"サガン鳥栖", jleagueEn:"Sagan Tosu", imageUrl:"images/players/15.jpg" },
-            { num:13, nameJa:"中村 敬斗", nameEn:"Keito Nakamura", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"スタッド・ランス", clubEn:"Stade Reims", prefectureJa:"千葉県", prefectureEn:"Chiba", prevClubJa:"LASK", prevClubEn:"LASK Linz", youthJa:"三菱養和SCユース", youthEn:"Mitsubishi Yowa SC Youth", jleagueJa:"ガンバ大阪", jleagueEn:"Gamba Osaka", imageUrl:"images/players/13.jpg" },
-            { num:24, nameJa:"佐野 海舟", nameEn:"Kaishu Sano", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"マインツ", clubEn:"Mainz", prefectureJa:"岡山県", prefectureEn:"Okayama", prevClubJa:"鹿島アントラーズ", prevClubEn:"Kashima Antlers", youthJa:"米子北高校", youthEn:"Yonago Kita HS", jleagueJa:"町田ゼルビア、鹿島アントラーズ", jleagueEn:"Machida Zelvia, Kashima Antlers", imageUrl:"images/players/24.jpg" },
-            { num:17, nameJa:"鈴木 唯人", nameEn:"Yuito Suzuki", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"SCフライブルク", clubEn:"SC Freiburg", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"ストレームスゴトセト", prevClubEn:"Stromsgodset", youthJa:"市立船橋高校", youthEn:"Funabashi Municipal HS", jleagueJa:"清水エスパルス", jleagueEn:"Shimizu S-Pulse", imageUrl:"images/players/17.jpg" },
-            // FW
-            { num:11, nameJa:"前田 大然", nameEn:"Daizen Maeda", posCode:"FW", posJa:"フォワード", posEn:"Forward", clubJa:"セルティック", clubEn:"Celtic", prefectureJa:"大阪府", prefectureEn:"Osaka", prevClubJa:"セルティック (継続)", prevClubEn:"Celtic (continuing)", youthJa:"山梨学院大学附属高校", youthEn:"Yamanashi Gakuin HS", jleagueJa:"松本山雅、横浜FM", jleagueEn:"Matsumoto Yamaga, Yokohama FM", imageUrl:"images/players/11.jpg" },
-            { num:18, nameJa:"上田 綺世", nameEn:"Ayase Ueda", posCode:"FW", posJa:"フォワード", posEn:"Forward", clubJa:"フェイエノールト", clubEn:"Feyenoord", prefectureJa:"茨城県", prefectureEn:"Ibaraki", prevClubJa:"セルクル・ブルージュ", prevClubEn:"Cercle Brugge", youthJa:"鹿島学園高校", youthEn:"Kashima Gakuen HS", jleagueJa:"鹿島アントラーズ", jleagueEn:"Kashima Antlers", imageUrl:"images/players/18.jpg" },
-            { num:19, nameJa:"小川 航基", nameEn:"Koki Ogawa", posCode:"FW", posJa:"フォワード", posEn:"Forward", clubJa:"NECナイメヘン", clubEn:"NEC Nijmegen", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"横浜FC", prevClubEn:"Yokohama FC", youthJa:"桐光学園高校", youthEn:"Tokogakuen HS", jleagueJa:"ジュビロ磐田、水戸、横浜FC", jleagueEn:"Jubilo Iwata, Mito, Yokohama FC", imageUrl:"images/players/19.jpg" },
-            { num:9, nameJa:"後藤 啓介", nameEn:"Keisuke Goto", posCode:"FW", posJa:"フォワード", posEn:"Forward", clubJa:"シント＝トロイデン", clubEn:"Sint-Truiden", prefectureJa:"静岡県", prefectureEn:"Shizuoka", prevClubJa:"アンデルレヒト", prevClubEn:"Anderlecht", youthJa:"ジュビロ磐田U-18", youthEn:"Jubilo Iwata U-18", jleagueJa:"ジュビロ磐田", jleagueEn:"Jubilo Iwata", imageUrl:"images/players/9.jpg" },
-            { num:26, nameJa:"塩貝 健人", nameEn:"Kento Shiogai", posCode:"FW", posJa:"フォワード", posEn:"Forward", clubJa:"VfLヴォルフスブルク", clubEn:"VfL Wolfsburg", prefectureJa:"東京都", prefectureEn:"Tokyo", prevClubJa:"NECナイメヘン", prevClubEn:"NEC Nijmegen", youthJa:"國學院大學久我山高校", youthEn:"Kokugakuin Univ. Kugayama HS", jleagueJa:"慶應大特別指定(横浜FM)", jleagueEn:"Keio Univ. (Yokohama FM)", imageUrl:"images/players/26.jpg" }
-        ];
-
-        // ポジションセクション定義
-        const POSITION_SECTIONS = [
-            { code: "GK", titleJa: "ゴールキーパー", titleEn: "Goalkeepers", badgeClass: "pos-gk" },
-            { code: "DF", titleJa: "ディフェンダー", titleEn: "Defenders", badgeClass: "pos-df" },
-            { code: "MF", titleJa: "ミッドフィールダー", titleEn: "Midfielders", badgeClass: "pos-mf" },
-            { code: "FW", titleJa: "フォワード", titleEn: "Forwards", badgeClass: "pos-fw" }
-        ];
+        const PLAYERS = {
+            GK: [
+                { num:1, nameJa:"鈴木 彩艶", nameEn:"Zion Suzuki", posCode:"GK", posJa:"ゴールキーパー", posEn:"Goalkeeper", clubJa:"パルマ (イタリア)", clubEn:"Parma (Italy)", prefectureJa:"埼玉県", prefectureEn:"Saitama", prevClubJa:"シント＝トロイデン", prevClubEn:"Sint-Truiden", youthJa:"浦和レッズユース", youthEn:"Urawa Reds Youth", jleagueJa:"浦和レッズ", jleagueEn:"Urawa Reds", imageUrl:"images/players/1.jpg" },
+                { num:12, nameJa:"大迫 敬介", nameEn:"Keisuke Osako", posCode:"GK", posJa:"ゴールキーパー", posEn:"Goalkeeper", clubJa:"サンフレッチェ広島", clubEn:"Sanfrecce Hiroshima", prefectureJa:"鹿児島県", prefectureEn:"Kagoshima", prevClubJa:"広島ユース昇格", prevClubEn:"Promoted from Youth", youthJa:"サンフレッチェ広島ユース", youthEn:"Sanfrecce Hiroshima Youth", jleagueJa:"サンフレッチェ広島", jleagueEn:"Sanfrecce Hiroshima", imageUrl:"images/players/12.jpg" },
+                { num:23, nameJa:"早川 友基", nameEn:"Tomoki Hayakawa", posCode:"GK", posJa:"ゴールキーパー", posEn:"Goalkeeper", clubJa:"鹿島アントラーズ", clubEn:"Kashima Antlers", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"ギラヴァンツ北九州", prevClubEn:"Giravanz Kitakyushu", youthJa:"桐蔭学園高校", youthEn:"Toin Gakuen HS", jleagueJa:"鹿島アントラーズ、ギラヴァンツ北九州", jleagueEn:"Kashima Antlers, Giravanz", imageUrl:"images/players/23.jpg" }
+            ],
+            DF: [
+                { num:5, nameJa:"長友 佑都", nameEn:"Yuto Nagatomo", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"FC東京", clubEn:"FC Tokyo", prefectureJa:"愛媛県", prefectureEn:"Ehime", prevClubJa:"ガンバ大阪", prevClubEn:"Gamba Osaka", youthJa:"東福岡高校", youthEn:"Higashi Fukuoka HS", jleagueJa:"FC東京、東京ヴェルディ、ガンバ大阪", jleagueEn:"FC Tokyo, Tokyo Verdy, Gamba Osaka", imageUrl:"images/players/5.jpg" },
+                { num:3, nameJa:"谷口 彰悟", nameEn:"Shogo Taniguchi", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"シント＝トロイデン", clubEn:"Sint-Truiden", prefectureJa:"熊本県", prefectureEn:"Kumamoto", prevClubJa:"川崎フロンターレ", prevClubEn:"Kawasaki Frontale", youthJa:"大津高校", youthEn:"Ozu HS", jleagueJa:"川崎フロンターレ", jleagueEn:"Kawasaki Frontale", imageUrl:"images/players/3.jpg" },
+                { num:4, nameJa:"板倉 滉", nameEn:"Ko Itakura", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"アヤックス", clubEn:"Ajax", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"ボルシアMG", prevClubEn:"Borussia M'gladbach", youthJa:"川崎フロンターレU-18", youthEn:"Kawasaki Frontale U-18", jleagueJa:"川崎フロンターレ、ベガルタ仙台", jleagueEn:"Kawasaki Frontale, Vegalta Sendai", imageUrl:"images/players/4.jpg" },
+                { num:16, nameJa:"渡辺 剛", nameEn:"Tsuyoshi Watanabe", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"フェイエノールト", clubEn:"Feyenoord", prefectureJa:"埼玉県", prefectureEn:"Saitama", prevClubJa:"FC東京", prevClubEn:"FC Tokyo", youthJa:"山梨学院大学附属高校", youthEn:"Yamanashi Gakuin HS", jleagueJa:"FC東京", jleagueEn:"FC Tokyo", imageUrl:"images/players/16.jpg" },
+                { num:22, nameJa:"冨安 健洋", nameEn:"Takehiro Tomiyasu", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"アヤックス", clubEn:"Ajax", prefectureJa:"福岡県", prefectureEn:"Fukuoka", prevClubJa:"アーセナル", prevClubEn:"Arsenal", youthJa:"アビスパ福岡U-18", youthEn:"Avispa Fukuoka U-18", jleagueJa:"アビスパ福岡", jleagueEn:"Avispa Fukuoka", imageUrl:"images/players/22.jpg" },
+                { num:21, nameJa:"伊藤 洋輝", nameEn:"Hiroki Ito", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"バイエルン・ミュンヘン", clubEn:"Bayern Munich", prefectureJa:"静岡県", prefectureEn:"Shizuoka", prevClubJa:"シュツットガルト", prevClubEn:"VfB Stuttgart", youthJa:"ジュビロ磐田U-18", youthEn:"Jubilo Iwata U-18", jleagueJa:"ジュビロ磐田", jleagueEn:"Jubilo Iwata", imageUrl:"images/players/21.jpg" },
+                { num:2, nameJa:"菅原 由勢", nameEn:"Yukinari Sugawara", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"ヴェルダー・ブレーメン", clubEn:"Werder Bremen", prefectureJa:"愛知県", prefectureEn:"Aichi", prevClubJa:"AZアルクマール", prevClubEn:"AZ Alkmaar", youthJa:"名古屋グランパスU-18", youthEn:"Nagoya Grampus U-18", jleagueJa:"名古屋グランパス", jleagueEn:"Nagoya Grampus", imageUrl:"images/players/2.jpg" },
+                { num:20, nameJa:"瀬古 歩夢", nameEn:"Ayumu Seko", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"ル・アーヴル", clubEn:"Le Havre", prefectureJa:"大阪府", prefectureEn:"Osaka", prevClubJa:"グラスホッパー", prevClubEn:"Grasshopper", youthJa:"セレッソ大阪U-18", youthEn:"Cerezo Osaka U-18", jleagueJa:"セレッソ大阪", jleagueEn:"Cerezo Osaka", imageUrl:"images/players/20.jpg" },
+                { num:25, nameJa:"鈴木 淳之介", nameEn:"Junnosuke Suzuki", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"FCコペンハーゲン", clubEn:"FC Copenhagen", prefectureJa:"岐阜県", prefectureEn:"Gifu", prevClubJa:"ブランビー", prevClubEn:"Brondby", youthJa:"帝京大学可児高校", youthEn:"Teikyo University Kani HS", jleagueJa:"湘南ベルマーレ", jleagueEn:"Shonan Bellmare", imageUrl:"images/players/25.jpg" }
+            ],
+            MF: [
+                { num:6, nameJa:"遠藤 航", nameEn:"Wataru Endo", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"リバプール", clubEn:"Liverpool", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"シュツットガルト", prevClubEn:"VfB Stuttgart", youthJa:"湘南ベルマーレユース", youthEn:"Shonan Bellmare Youth", jleagueJa:"湘南ベルマーレ、浦和レッズ", jleagueEn:"Shonan Bellmare, Urawa Reds", imageUrl:"images/players/6.jpg" },
+                { num:7, nameJa:"田中 碧", nameEn:"Ao Tanaka", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"リーズ・ユナイテッド", clubEn:"Leeds United", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"デュッセルドルフ", prevClubEn:"Fortuna Dusseldorf", youthJa:"川崎フロンターレU-18", youthEn:"Kawasaki Frontale U-18", jleagueJa:"川崎フロンターレ", jleagueEn:"Kawasaki Frontale", imageUrl:"images/players/7.jpg" },
+                { num:8, nameJa:"久保 建英", nameEn:"Takefusa Kubo", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"レアル・ソシエダ", clubEn:"Real Sociedad", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"レアル・マドリード", prevClubEn:"Real Madrid", youthJa:"FC東京U-18", youthEn:"FC Tokyo U-18", jleagueJa:"FC東京、横浜F・マリノス", jleagueEn:"FC Tokyo, Yokohama F.Marinos", imageUrl:"images/players/8.jpg" },
+                { num:10, nameJa:"堂安 律", nameEn:"Ritsu Doan", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"アイントラハト・フランクフルト", clubEn:"Eintracht Frankfurt", prefectureJa:"兵庫県", prefectureEn:"Hyogo", prevClubJa:"SCフライブルク", prevClubEn:"SC Freiburg", youthJa:"ガンバ大阪ユース", youthEn:"Gamba Osaka Youth", jleagueJa:"ガンバ大阪", jleagueEn:"Gamba Osaka", imageUrl:"images/players/10.jpg" },
+                { num:14, nameJa:"伊東 純也", nameEn:"Junya Ito", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"KRCヘンク", clubEn:"KRC Genk", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"ヘンク (継続)", prevClubEn:"Genk (continuing)", youthJa:"県立逗葉高校", youthEn:"Prefectural Zuyo HS", jleagueJa:"柏レイソル", jleagueEn:"Kashiwa Reysol", imageUrl:"images/players/14.jpg" },
+                { num:15, nameJa:"鎌田 大地", nameEn:"Daichi Kamada", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"クリスタル・パレス", clubEn:"Crystal Palace", prefectureJa:"愛媛県", prefectureEn:"Ehime", prevClubJa:"ラツィオ", prevClubEn:"Lazio", youthJa:"東山高校", youthEn:"Higashiyama HS", jleagueJa:"サガン鳥栖", jleagueEn:"Sagan Tosu", imageUrl:"images/players/15.jpg" },
+                { num:13, nameJa:"中村 敬斗", nameEn:"Keito Nakamura", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"スタッド・ランス", clubEn:"Stade Reims", prefectureJa:"千葉県", prefectureEn:"Chiba", prevClubJa:"LASK", prevClubEn:"LASK Linz", youthJa:"三菱養和SCユース", youthEn:"Mitsubishi Yowa SC Youth", jleagueJa:"ガンバ大阪", jleagueEn:"Gamba Osaka", imageUrl:"images/players/13.jpg" },
+                { num:24, nameJa:"佐野 海舟", nameEn:"Kaishu Sano", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"マインツ", clubEn:"Mainz", prefectureJa:"岡山県", prefectureEn:"Okayama", prevClubJa:"鹿島アントラーズ", prevClubEn:"Kashima Antlers", youthJa:"米子北高校", youthEn:"Yonago Kita HS", jleagueJa:"町田ゼルビア、鹿島アントラーズ", jleagueEn:"Machida Zelvia, Kashima Antlers", imageUrl:"images/players/24.jpg" },
+                { num:17, nameJa:"鈴木 唯人", nameEn:"Yuito Suzuki", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"SCフライブルク", clubEn:"SC Freiburg", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"ストレームスゴトセト", prevClubEn:"Stromsgodset", youthJa:"市立船橋高校", youthEn:"Funabashi Municipal HS", jleagueJa:"清水エスパルス", jleagueEn:"Shimizu S-Pulse", imageUrl:"images/players/17.jpg" }
+            ],
+            FW: [
+                { num:11, nameJa:"前田 大然", nameEn:"Daizen Maeda", posCode:"FW", posJa:"フォワード", posEn:"Forward", clubJa:"セルティック", clubEn:"Celtic", prefectureJa:"大阪府", prefectureEn:"Osaka", prevClubJa:"セルティック (継続)", prevClubEn:"Celtic (continuing)", youthJa:"山梨学院大学附属高校", youthEn:"Yamanashi Gakuin HS", jleagueJa:"松本山雅、横浜FM", jleagueEn:"Matsumoto Yamaga, Yokohama FM", imageUrl:"images/players/11.jpg" },
+                { num:18, nameJa:"上田 綺世", nameEn:"Ayase Ueda", posCode:"FW", posJa:"フォワード", posEn:"Forward", clubJa:"フェイエノールト", clubEn:"Feyenoord", prefectureJa:"茨城県", prefectureEn:"Ibaraki", prevClubJa:"セルクル・ブルージュ", prevClubEn:"Cercle Brugge", youthJa:"鹿島学園高校", youthEn:"Kashima Gakuen HS", jleagueJa:"鹿島アントラーズ", jleagueEn:"Kashima Antlers", imageUrl:"images/players/18.jpg" },
+                { num:19, nameJa:"小川 航基", nameEn:"Koki Ogawa", posCode:"FW", posJa:"フォワード", posEn:"Forward", clubJa:"NECナイメヘン", clubEn:"NEC Nijmegen", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"横浜FC", prevClubEn:"Yokohama FC", youthJa:"桐光学園高校", youthEn:"Tokogakuen HS", jleagueJa:"ジュビロ磐田、水戸、横浜FC", jleagueEn:"Jubilo Iwata, Mito, Yokohama FC", imageUrl:"images/players/19.jpg" },
+                { num:9, nameJa:"後藤 啓介", nameEn:"Keisuke Goto", posCode:"FW", posJa:"フォワード", posEn:"Forward", clubJa:"シント＝トロイデン", clubEn:"Sint-Truiden", prefectureJa:"静岡県", prefectureEn:"Shizuoka", prevClubJa:"アンデルレヒト", prevClubEn:"Anderlecht", youthJa:"ジュビロ磐田U-18", youthEn:"Jubilo Iwata U-18", jleagueJa:"ジュビロ磐田", jleagueEn:"Jubilo Iwata", imageUrl:"images/players/9.jpg" },
+                { num:26, nameJa:"塩貝 健人", nameEn:"Kento Shiogai", posCode:"FW", posJa:"フォワード", posEn:"Forward", clubJa:"VfLヴォルフスブルク", clubEn:"VfL Wolfsburg", prefectureJa:"東京都", prefectureEn:"Tokyo", prevClubJa:"NECナイメヘン", prevClubEn:"NEC Nijmegen", youthJa:"國學院大學久我山高校", youthEn:"Kokugakuin Univ. Kugayama HS", jleagueJa:"慶應大特別指定(横浜FM)", jleagueEn:"Keio Univ. (Yokohama FM)", imageUrl:"images/players/26.jpg" }
+            ]
+        };
 
         // ==================== 言語リソース ====================
         const UI_TEXTS = {
@@ -453,7 +460,11 @@
                 siteSub: "Japan National Team 2026",
                 contact: "Contact us",
                 back: "← Back to Main",
-                sectionCoach: "Head Coach",
+                groupCoach: "Head Coach",
+                groupGK: "Goalkeepers",
+                groupDF: "Defenders",
+                groupMF: "Midfielders",
+                groupFW: "Forwards",
                 themeLight: "☀️ Light",
                 themeDark: "🌙 Dark",
                 langJa: "🇯🇵 日本語",
@@ -475,7 +486,11 @@
                 siteSub: "日本代表 2026",
                 contact: "お問い合わせ",
                 back: "← 一覧に戻る",
-                sectionCoach: "監督",
+                groupCoach: "監督",
+                groupGK: "ゴールキーパー",
+                groupDF: "ディフェンダー",
+                groupMF: "ミッドフィールダー",
+                groupFW: "フォワード",
                 themeLight: "☀️ ライト",
                 themeDark: "🌙 ダーク",
                 langJa: "🇯🇵 日本語",
@@ -520,7 +535,7 @@
             if (!mainView.classList.contains('hidden')) {
                 renderMainList();
             } else {
-                if (window._currentDetailItem) renderDetail(window._currentDetailItem);
+                if (window._currentDetailItem) renderDetail(window._currentDetailItem.item, window._currentDetailItem.isCoach);
             }
         }
 
@@ -547,27 +562,26 @@
             }
         }
 
-        // カード生成
-        function createPlayerCard(player, isCoach = false) {
-            const name = currentLang === 'ja' ? player.nameJa : player.nameEn;
-            const nameSub = currentLang === 'ja' ? player.nameEn : player.nameJa;
+        function createCard(item, isCoach = false, positionGroup = null) {
+            const name = currentLang === 'ja' ? item.nameJa : item.nameEn;
+            const nameSub = currentLang === 'ja' ? item.nameEn : item.nameJa;
             let pos, club, badgeClass;
             
             if (isCoach) {
-                pos = currentLang === 'ja' ? player.roleJa : player.roleEn;
+                pos = currentLang === 'ja' ? item.roleJa : item.roleEn;
                 club = "";
                 badgeClass = "pos-coach";
             } else {
-                pos = currentLang === 'ja' ? player.posJa : player.posEn;
-                club = currentLang === 'ja' ? player.clubJa : player.clubEn;
-                badgeClass = `pos-${player.posCode.toLowerCase()}`;
+                pos = currentLang === 'ja' ? item.posJa : item.posEn;
+                club = currentLang === 'ja' ? item.clubJa : item.clubEn;
+                badgeClass = `pos-${item.posCode.toLowerCase()}`;
             }
             
             const card = document.createElement('div');
             card.className = `player-card ${isCoach ? 'coach-card' : ''}`;
             card.innerHTML = `
                 <div class="card-img">
-                    ${renderPlayerImage(player.imageUrl, name)}
+                    ${renderPlayerImage(item.imageUrl, name)}
                 </div>
                 <div class="player-info">
                     <div class="player-name">${name} <span class="player-name-en">${nameSub}</span></div>
@@ -575,60 +589,108 @@
                     ${!isCoach ? `<div class="player-club">${club}</div>` : ''}
                 </div>
             `;
-            card.addEventListener('click', () => showDetail(player, isCoach));
+            card.addEventListener('click', () => showDetail(item, isCoach));
             return card;
         }
 
         function renderMainList() {
             const t = UI_TEXTS[currentLang];
-            let html = `<div class="main-container">`;
             
-            // 監督セクション
-            html += `
-                <div class="position-section">
-                    <div class="section-header">
-                        <h2 class="section-title">${t.sectionCoach}</h2>
-                        <span class="section-count">1</span>
+            const coachCount = 1;
+            const gkCount = PLAYERS.GK.length;
+            const dfCount = PLAYERS.DF.length;
+            const mfCount = PLAYERS.MF.length;
+            const fwCount = PLAYERS.FW.length;
+            
+            mainView.innerHTML = `
+                <div class="main-container">
+                    <div class="three-columns">
+                        <!-- 左カラム: 監督 + GK -->
+                        <div class="column">
+                            <div class="position-group">
+                                <div class="group-header">
+                                    <span class="group-title">${t.groupCoach}</span>
+                                    <span class="group-count">${coachCount}</span>
+                                </div>
+                                <div id="coach-container"></div>
+                            </div>
+                            <div class="position-group">
+                                <div class="group-header">
+                                    <span class="group-title">${t.groupGK}</span>
+                                    <span class="group-count">${gkCount}</span>
+                                </div>
+                                <div id="gk-container"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- 中央カラム: DF + MF -->
+                        <div class="column">
+                            <div class="position-group">
+                                <div class="group-header">
+                                    <span class="group-title">${t.groupDF}</span>
+                                    <span class="group-count">${dfCount}</span>
+                                </div>
+                                <div id="df-container"></div>
+                            </div>
+                            <div class="position-group">
+                                <div class="group-header">
+                                    <span class="group-title">${t.groupMF}</span>
+                                    <span class="group-count">${mfCount}</span>
+                                </div>
+                                <div id="mf-container"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- 右カラム: FW -->
+                        <div class="column">
+                            <div class="position-group">
+                                <div class="group-header">
+                                    <span class="group-title">${t.groupFW}</span>
+                                    <span class="group-count">${fwCount}</span>
+                                </div>
+                                <div id="fw-container"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="players-grid" id="coach-grid"></div>
                 </div>
             `;
             
-            // 選手セクション
-            for (const section of POSITION_SECTIONS) {
-                const playersInSection = PLAYERS.filter(p => p.posCode === section.code);
-                if (playersInSection.length === 0) continue;
-                
-                const sectionTitle = currentLang === 'ja' ? section.titleJa : section.titleEn;
-                html += `
-                    <div class="position-section">
-                        <div class="section-header">
-                            <h2 class="section-title">${sectionTitle}</h2>
-                            <span class="section-count">${playersInSection.length}</span>
-                        </div>
-                        <div class="players-grid" id="grid-${section.code}"></div>
-                    </div>
-                `;
-            }
-            
-            html += `</div>`;
-            mainView.innerHTML = html;
-            
             // 監督カード追加
-            const coachGrid = document.getElementById('coach-grid');
-            if (coachGrid) {
-                coachGrid.appendChild(createPlayerCard(COACH, true));
+            const coachContainer = document.getElementById('coach-container');
+            if (coachContainer) {
+                coachContainer.appendChild(createCard(COACH, true));
             }
             
-            // 選手カード追加
-            for (const section of POSITION_SECTIONS) {
-                const grid = document.getElementById(`grid-${section.code}`);
-                if (grid) {
-                    const playersInSection = PLAYERS.filter(p => p.posCode === section.code);
-                    playersInSection.forEach(p => {
-                        grid.appendChild(createPlayerCard(p, false));
-                    });
-                }
+            // GK追加
+            const gkContainer = document.getElementById('gk-container');
+            if (gkContainer) {
+                PLAYERS.GK.forEach(p => {
+                    gkContainer.appendChild(createCard(p, false));
+                });
+            }
+            
+            // DF追加
+            const dfContainer = document.getElementById('df-container');
+            if (dfContainer) {
+                PLAYERS.DF.forEach(p => {
+                    dfContainer.appendChild(createCard(p, false));
+                });
+            }
+            
+            // MF追加
+            const mfContainer = document.getElementById('mf-container');
+            if (mfContainer) {
+                PLAYERS.MF.forEach(p => {
+                    mfContainer.appendChild(createCard(p, false));
+                });
+            }
+            
+            // FW追加
+            const fwContainer = document.getElementById('fw-container');
+            if (fwContainer) {
+                PLAYERS.FW.forEach(p => {
+                    fwContainer.appendChild(createCard(p, false));
+                });
             }
         }
 
@@ -727,7 +789,7 @@
 
         init();
 
-        // PWA Service Worker
+        // PWA Service Worker (パス指定なし)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then(reg => {
