@@ -1,0 +1,25 @@
+{
+  "name": "SAMURAI BLUE 2026",
+  "short_name": "JapanNT",
+  "description": "Japan National Team World Cup 2026 App",
+  "start_url": "index.html",
+  "display": "standalone",
+  "theme_color": "#1a2a4f",
+  "background_color": "#0a1428",
+  "lang": "en",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icons/icon-192.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

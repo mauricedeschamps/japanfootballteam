@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1a2a4f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SAMURAI BLUE">
+    <link rel="apple-touch-icon" href="icons/icon-192.jpg">
+    <link rel="manifest" href="manifest.json">
+    <title>Japan National Team - SAMURAI BLUE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        /* ダークテーマ (サムライブルー) - デフォルト */
+        :root {
+            --bg-primary: #0a1428;
+            --bg-secondary: #0f1a30;
+            --bg-card: #16223b;
+            --text-primary: #e8eef4;
+            --text-secondary: #a0b3cc;
+            --text-muted: #6a7c9e;
+            --border: #243555;
+            --accent: #1e3a6b;
+            --accent-glow: #2b4a82;
+            --samurai-blue: #1a2a4f;
+            --samurai-gold: #c9a83b;
+            --header-bg: #07122a;
+            --btn-hover: #2b4a82;
+        }
+
+        /* ライトテーマ (クリアモード) */
+        body.light {
+            --bg-primary: #f0f4f8;
+            --bg-secondary: #e4eaf1;
+            --bg-card: #ffffff;
+            --text-primary: #1e2a3a;
+            --text-secondary: #3a4a5a;
+            --text-muted: #6c7a8a;
+            --border: #cbd5e1;
+            --accent: #d4e0f0;
+            --accent-glow: #e2e8f0;
+            --samurai-blue: #2563eb;
+            --samurai-gold: #b8860b;
+            --header-bg: #ffffff;
+            --btn-hover: #1e3a8a;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', 'Noto Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ヘッダー */
+        .app-header {
+            background-color: var(--header-bg);
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid var(--samurai-gold);
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .logo p {
+            font-size: 0.75rem;
+            color: var(--samurai-gold);
+            letter-spacing: 1px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: var(--accent);
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            background-color: var(--btn-hover);
+            transform: scale(1.02);
+        }
+
+        .btn-active {
+            background-color: var(--samurai-gold);
+            color: #0a1428;
+        }
+
+        /* メインコンテンツ */
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .players-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .player-card {
+            background-color: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid var(--border);
+        }
+
+        .player-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+        }
+
+        .card-img {
+            background: linear-gradient(135deg, var(--samurai-blue), var(--bg-secondary));
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--samurai-gold);
+            position: relative;
+        }
+
+        .card-img span {
+            background: rgba(0,0,0,0.5);
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 2rem;
+        }
+
+        .player-info {
+            padding: 1.2rem;
+        }
+
+        .player-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+
+        .player-name-en {
+            font-size: 1rem;
+            font-weight: normal;
+            color: var(--text-secondary);
+        }
+
+        .player-pos {
+            display: inline-block;
+            background: var(--samurai-gold);
+            color: #0a1428;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
+        .player-club {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* 詳細ページ */
+        .detail-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .detail-card {
+            background-color: var(--bg-card);
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .detail-header {
+            background: linear-gradient(135deg, var(--samurai-blue), var(--bg-secondary));
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 2px solid var(--samurai-gold);
+        }
+
+        .detail-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--samurai-gold);
+        }
+
+        .detail-name {
+            font-size: 2rem;
+            margin-top: 0.5rem;
+        }
+
+        .detail-name-en {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .detail-body {
+            padding: 2rem;
+        }
+
+        .info-row {
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: var(--samurai-gold);
+            min-width: 110px;
+            display: inline-block;
+        }
+
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 2rem auto 1rem;
+            padding: 0.8rem;
+            text-align: center;
+            background-color: var(--accent);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* フッター */
+        .app-footer {
+            background-color: var(--header-bg);
+            padding: 2rem 1.5rem;
+            margin-top: 3rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-email {
+            color: var(--samurai-gold);
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        /* ユーティリティ */
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo">
+                <h1 id="site-title">⚽ SAMURAI BLUE</h1>
+                <p id="site-sub">Japan National Team 2026</p>
+            </div>
+            <div class="controls">
+                <button id="lang-btn" class="btn">🇯🇵 日本語</button>
+                <button id="theme-btn" class="btn">☀️ Light</button>
+            </div>
+        </div>
+    </header>
+
+    <main id="app-root">
+        <!-- メイン画面 or 詳細画面が動的に切り替わる -->
+        <div id="main-view"></div>
+        <div id="detail-view" class="hidden"></div>
+    </main>
+
+    <footer class="app-footer">
+        <div class="footer-content">
+            <p id="contact-text">Contact us</p>
+            <a href="mailto:mementomorikatsu@gmail.com" class="footer-email">mementomorikatsu@gmail.com</a>
+        </div>
+    </footer>
+
+    <script>
+        // ----------------------------- 選手データ (完全版 26名) -----------------------------
+        const PLAYERS = [
+            { num:1, nameJa:"鈴木 彩艶", nameEn:"Zion Suzuki", pos:"GK", club:"パルマ (イタリア)", prefecture:"埼玉県", prevClub:"シント＝トロイデン", youth:"浦和レッズユース", jleague:"浦和レッズ" },
+            { num:12, nameJa:"大迫 敬介", nameEn:"Keisuke Osako", pos:"GK", club:"サンフレッチェ広島", prefecture:"鹿児島県", prevClub:"広島ユース昇格", youth:"サンフレッチェ広島ユース", jleague:"サンフレッチェ広島" },
+            { num:23, nameJa:"早川 友基", nameEn:"Tomoki Hayakawa", pos:"GK", club:"鹿島アントラーズ", prefecture:"神奈川県", prevClub:"ギラヴァンツ北九州", youth:"桐蔭学園高校", jleague:"鹿島アントラーズ、ギラヴァンツ北九州" },
+            { num:5, nameJa:"長友 佑都", nameEn:"Yuto Nagatomo", pos:"DF", club:"FC東京", prefecture:"愛媛県", prevClub:"ガンバ大阪", youth:"東福岡高校", jleague:"FC東京、東京ヴェルディ、ガンバ大阪" },
+            { num:3, nameJa:"谷口 彰悟", nameEn:"Shogo Taniguchi", pos:"DF", club:"シント＝トロイデン", prefecture:"熊本県", prevClub:"川崎フロンターレ", youth:"大津高校", jleague:"川崎フロンターレ" },
+            { num:4, nameJa:"板倉 滉", nameEn:"Ko Itakura", pos:"DF", club:"アヤックス", prefecture:"神奈川県", prevClub:"ボルシアMG", youth:"川崎フロンターレU-18", jleague:"川崎フロンターレ、ベガルタ仙台" },
+            { num:16, nameJa:"渡辺 剛", nameEn:"Tsuyoshi Watanabe", pos:"DF", club:"フェイエノールト", prefecture:"埼玉県", prevClub:"FC東京", youth:"山梨学院大学附属高校", jleague:"FC東京" },
+            { num:22, nameJa:"冨安 健洋", nameEn:"Takehiro Tomiyasu", pos:"DF", club:"アヤックス", prefecture:"福岡県", prevClub:"アーセナル", youth:"アビスパ福岡U-18", jleague:"アビスパ福岡" },
+            { num:21, nameJa:"伊藤 洋輝", nameEn:"Hiroki Ito", pos:"DF", club:"バイエルン・ミュンヘン", prefecture:"静岡県", prevClub:"シュツットガルト", youth:"ジュビロ磐田U-18", jleague:"ジュビロ磐田" },
+            { num:2, nameJa:"菅原 由勢", nameEn:"Yukinari Sugawara", pos:"DF", club:"ヴェルダー・ブレーメン", prefecture:"愛知県", prevClub:"AZアルクマール", youth:"名古屋グランパスU-18", jleague:"名古屋グランパス" },
+            { num:20, nameJa:"瀬古 歩夢", nameEn:"Ayumu Seko", pos:"DF", club:"ル・アーヴル", prefecture:"大阪府", prevClub:"グラスホッパー", youth:"セレッソ大阪U-18", jleague:"セレッソ大阪" },
+            { num:25, nameJa:"鈴木 淳之介", nameEn:"Junnosuke Suzuki", pos:"DF", club:"FCコペンハーゲン", prefecture:"岐阜県", prevClub:"ブランビー", youth:"帝京大学可児高校", jleague:"湘南ベルマーレ" },
+            { num:6, nameJa:"遠藤 航", nameEn:"Wataru Endo", pos:"MF", club:"リバプール", prefecture:"神奈川県", prevClub:"シュツットガルト", youth:"湘南ベルマーレユース", jleague:"湘南ベルマーレ、浦和レッズ" },
+            { num:7, nameJa:"田中 碧", nameEn:"Ao Tanaka", pos:"MF", club:"リーズ・ユナイテッド", prefecture:"神奈川県", prevClub:"デュッセルドルフ", youth:"川崎フロンターレU-18", jleague:"川崎フロンターレ" },
+            { num:8, nameJa:"久保 建英", nameEn:"Takefusa Kubo", pos:"MF", club:"レアル・ソシエダ", prefecture:"神奈川県", prevClub:"レアル・マドリード", youth:"FC東京U-18", jleague:"FC東京、横浜F・マリノス" },
+            { num:10, nameJa:"堂安 律", nameEn:"Ritsu Doan", pos:"MF", club:"フランクフルト", prefecture:"兵庫県", prevClub:"SCフライブルク", youth:"ガンバ大阪ユース", jleague:"ガンバ大阪" },
+            { num:14, nameJa:"伊東 純也", nameEn:"Junya Ito", pos:"MF", club:"KRCヘンク", prefecture:"神奈川県", prevClub:"ヘンク継続", youth:"県立逗葉高校", jleague:"柏レイソル" },
+            { num:15, nameJa:"鎌田 大地", nameEn:"Daichi Kamada", pos:"MF", club:"クリスタル・パレス", prefecture:"愛媛県", prevClub:"ラツィオ", youth:"東山高校", jleague:"サガン鳥栖" },
+            { num:13, nameJa:"中村 敬斗", nameEn:"Keito Nakamura", pos:"MF", club:"スタッド・ランス", prefecture:"千葉県", prevClub:"LASK", youth:"三菱養和SCユース", jleague:"ガンバ大阪" },
+            { num:24, nameJa:"佐野 海舟", nameEn:"Kaishu Sano", pos:"MF", club:"マインツ", prefecture:"岡山県", prevClub:"鹿島アントラーズ", youth:"米子北高校", jleague:"町田ゼルビア、鹿島アントラーズ" },
+            { num:11, nameJa:"前田 大然", nameEn:"Daizen Maeda", pos:"FW", club:"セルティック", prefecture:"大阪府", prevClub:"セルティック継続", youth:"山梨学院大学附属高校", jleague:"松本山雅、横浜FM" },
+            { num:18, nameJa:"上田 綺世", nameEn:"Ayase Ueda", pos:"FW", club:"フェイエノールト", prefecture:"茨城県", prevClub:"セルクル・ブルージュ", youth:"鹿島学園高校", jleague:"鹿島アントラーズ" },
+            { num:19, nameJa:"小川 航基", nameEn:"Koki Ogawa", pos:"FW", club:"NECナイメヘン", prefecture:"神奈川県", prevClub:"横浜FC", youth:"桐光学園高校", jleague:"ジュビロ磐田、水戸、横浜FC" },
+            { num:9, nameJa:"後藤 啓介", nameEn:"Keisuke Goto", pos:"FW", club:"シント＝トロイデン", prefecture:"静岡県", prevClub:"アンデルレヒト", youth:"ジュビロ磐田U-18", jleague:"ジュビロ磐田" },
+            { num:17, nameJa:"鈴木 唯人", nameEn:"Yuito Suzuki", pos:"MF", club:"SCフライブルク", prefecture:"神奈川県", prevClub:"ストレームスゴトセト", youth:"市立船橋高校", jleague:"清水エスパルス" },
+            { num:26, nameJa:"塩貝 健人", nameEn:"Kento Shiogai", pos:"FW", club:"VfLヴォルフスブルク", prefecture:"東京都", prevClub:"NECナイメヘン", youth:"國學院大學久我山高校", jleague:"慶應大特別指定(横浜FM)" }
+        ];
+
+        // 言語リソース
+        const texts = {
+            en: {
+                siteTitle: "⚽ SAMURAI BLUE",
+                siteSub: "Japan National Team 2026",
+                contact: "Contact us",
+                back: "← Back to Players",
+                loading: "Loading...",
+                detailLabels: {
+                    position: "Position",
+                    club: "Current Club",
+                    prefecture: "Home Prefecture",
+                    prevClub: "Previous Club",
+                    youth: "Youth / High School",
+                    jleague: "JLeague Clubs"
+                }
+            },
+            ja: {
+                siteTitle: "⚽ サムライブルー",
+                siteSub: "日本代表 2026",
+                contact: "お問い合わせ",
+                back: "← 選手一覧に戻る",
+                loading: "読み込み中...",
+                detailLabels: {
+                    position: "ポジション",
+                    club: "現所属",
+                    prefecture: "出身県",
+                    prevClub: "前所属",
+                    youth: "ユース/高校",
+                    jleague: "Jリーグ歴"
+                }
+            }
+        };
+
+        let currentLang = 'en';   // 'en' or 'ja'
+        let currentTheme = 'dark'; // 'dark' or 'light'
+
+        // DOM elements
+        const mainView = document.getElementById('main-view');
+        const detailView = document.getElementById('detail-view');
+        const langBtn = document.getElementById('lang-btn');
+        const themeBtn = document.getElementById('theme-btn');
+        const siteTitle = document.getElementById('site-title');
+        const siteSub = document.getElementById('site-sub');
+        const contactText = document.getElementById('contact-text');
+
+        // 言語切り替え
+        function setLanguage(lang) {
+            currentLang = lang;
+            const t = texts[lang];
+            siteTitle.innerText = t.siteTitle;
+            siteSub.innerText = t.siteSub;
+            contactText.innerText = t.contact;
+            langBtn.innerHTML = lang === 'en' ? '🇯🇵 日本語' : '🇬🇧 English';
+            // 再描画
+            if (!mainView.classList.contains('hidden')) {
+                renderMainList();
+            } else {
+                const currentPlayer = window._currentDetailPlayer;
+                if(currentPlayer) renderDetail(currentPlayer);
+            }
+        }
+
+        // テーマ切り替え
+        function setTheme(theme) {
+            currentTheme = theme;
+            if(theme === 'light') {
+                document.body.classList.add('light');
+                themeBtn.innerHTML = '🌙 Dark';
+            } else {
+                document.body.classList.remove('light');
+                themeBtn.innerHTML = '☀️ Light';
+            }
+        }
+
+        // メインリスト描画
+        function renderMainList() {
+            mainView.innerHTML = '<div class="main-container"><h2 id="players-heading">' + (currentLang === 'en' ? 'Squad 2026' : '登録メンバー 2026') + '</h2><div class="players-grid" id="players-grid"></div></div>';
+            const grid = document.getElementById('players-grid');
+            PLAYERS.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'player-card';
+                card.setAttribute('data-id', p.num);
+                card.innerHTML = `
+                    <div class="card-img"><span>${p.num}</span></div>
+                    <div class="player-info">
+                        <div class="player-name">${currentLang === 'ja' ? p.nameJa : p.nameEn} <span class="player-name-en">${currentLang === 'ja' ? p.nameEn : p.nameJa}</span></div>
+                        <div class="player-pos">${p.pos}</div>
+                        <div class="player-club">${p.club}</div>
+                    </div>
+                `;
+                card.addEventListener('click', () => showDetail(p));
+                grid.appendChild(card);
+            });
+        }
+
+        // 詳細画面表示
+        function showDetail(player) {
+            window._currentDetailPlayer = player;
+            renderDetail(player);
+            mainView.classList.add('hidden');
+            detailView.classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function renderDetail(p) {
+            const t = texts[currentLang];
+            detailView.innerHTML = `
+                <div class="detail-container">
+                    <div class="detail-card">
+                        <div class="detail-header">
+                            <div class="detail-number">${p.num}</div>
+                            <div class="detail-name">${currentLang === 'ja' ? p.nameJa : p.nameEn}</div>
+                            <div class="detail-name-en">${currentLang === 'ja' ? p.nameEn : p.nameJa}</div>
+                            <div class="player-pos" style="margin-top:1rem;">${p.pos}</div>
+                        </div>
+                        <div class="detail-body">
+                            <div class="info-row"><span class="info-label">${t.detailLabels.position}:</span> ${p.pos}</div>
+                            <div class="info-row"><span class="info-label">${t.detailLabels.club}:</span> ${p.club}</div>
+                            <div class="info-row"><span class="info-label">${t.detailLabels.prefecture}:</span> ${p.prefecture}</div>
+                            <div class="info-row"><span class="info-label">${t.detailLabels.prevClub}:</span> ${p.prevClub}</div>
+                            <div class="info-row"><span class="info-label">${t.detailLabels.youth}:</span> ${p.youth}</div>
+                            <div class="info-row"><span class="info-label">${t.detailLabels.jleague}:</span> ${p.jleague || '—'}</div>
+                        </div>
+                    </div>
+                    <button id="detail-back-btn" class="back-btn">${t.back}</button>
+                </div>
+            `;
+            document.getElementById('detail-back-btn').addEventListener('click', () => {
+                mainView.classList.remove('hidden');
+                detailView.classList.add('hidden');
+                renderMainList(); // 言語維持のため再描画
+            });
+        }
+
+        // 初期表示
+        function init() {
+            setTheme('dark');
+            setLanguage('en');
+            renderMainList();
+            langBtn.addEventListener('click', () => {
+                setLanguage(currentLang === 'en' ? 'ja' : 'en');
+            });
+            themeBtn.addEventListener('click', () => {
+                setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+            });
+        }
+
+        init();
+
+        // PWA サービスワーカー登録
+        if('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(reg => {
+                    console.log('SW registered: ', reg);
+                }).catch(err => {
+                    console.log('SW registration failed: ', err);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
