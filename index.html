@@ -151,7 +151,6 @@
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
-            /* スクロールバーを隠す (任意) */
             scrollbar-width: thin;
         }
 
@@ -281,7 +280,7 @@
             margin-top: 0.4rem;
         }
 
-        /* 詳細画面 (以前と同じ) */
+        /* 詳細画面 */
         .detail-container {
             max-width: 800px;
             margin: 2rem auto;
@@ -443,6 +442,7 @@
         };
 
         // ==================== 選手データ ====================
+        // 変更点: 遠藤航 → 町野修斗 (FWへ追加、MFから削除)
         const PLAYERS = {
             GK: [
                 { num:1, nameJa:"鈴木 彩艶", nameEn:"Zion Suzuki", posCode:"GK", posJa:"ゴールキーパー", posEn:"Goalkeeper", clubJa:"パルマ (イタリア)", clubEn:"Parma (Italy)", prefectureJa:"埼玉県", prefectureEn:"Saitama", prevClubJa:"シント＝トロイデン", prevClubEn:"Sint-Truiden", youthJa:"浦和レッズユース", youthEn:"Urawa Reds Youth", jleagueJa:"浦和レッズ", jleagueEn:"Urawa Reds", imageUrl:"https://www.nippon.com/ja/ncommon/contents/japan-data/3004045/3004045.jpg" },
@@ -457,11 +457,11 @@
                 { num:22, nameJa:"冨安 健洋", nameEn:"Takehiro Tomiyasu", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"アヤックス", clubEn:"Ajax", prefectureJa:"福岡県", prefectureEn:"Fukuoka", prevClubJa:"アーセナル", prevClubEn:"Arsenal", youthJa:"アビスパ福岡U-18", youthEn:"Avispa Fukuoka U-18", jleagueJa:"アビスパ福岡", jleagueEn:"Avispa Fukuoka", imageUrl:"https://www.nippon.com/ja/ncommon/contents/japan-data/3004060/3004060.jpg" },
                 { num:21, nameJa:"伊藤 洋輝", nameEn:"Hiroki Ito", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"バイエルン・ミュンヘン", clubEn:"Bayern Munich", prefectureJa:"静岡県", prefectureEn:"Shizuoka", prevClubJa:"シュツットガルト", prevClubEn:"VfB Stuttgart", youthJa:"ジュビロ磐田U-18", youthEn:"Jubilo Iwata U-18", jleagueJa:"ジュビロ磐田", jleagueEn:"Jubilo Iwata", imageUrl:"https://www.nippon.com/ja/ncommon/contents/japan-data/3004054/3004054.jpg" },
                 { num:2, nameJa:"菅原 由勢", nameEn:"Yukinari Sugawara", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"ヴェルダー・ブレーメン", clubEn:"Werder Bremen", prefectureJa:"愛知県", prefectureEn:"Aichi", prevClubJa:"AZアルクマール", prevClubEn:"AZ Alkmaar", youthJa:"名古屋グランパスU-18", youthEn:"Nagoya Grampus U-18", jleagueJa:"名古屋グランパス", jleagueEn:"Nagoya Grampus", imageUrl:"https://www.nippon.com/ja/ncommon/contents/japan-data/3004062/3004062.jpg" },
-                { num:20, nameJa:"瀬古 歩夢", nameEn:"Ayumu Seko", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"ル・アーヴル", clubEn:"Le Havre", prefectureJa:"大阪府", prefectureEn:"Osaka", prevClubJa:"グラスホッパー", prevClubEn:"Grasshopper", youthJa:"セレッソ大阪U-18", youthEn:"Cerezo Osaka U-18", jleagueJa:"セレッソ大阪", jleagueEn:"Cerezo Osaka", imageUrl:"https://www.nippon.com/ja/ncommon/contents/japan-data/3004061/3004061.jpg },
+                { num:20, nameJa:"瀬古 歩夢", nameEn:"Ayumu Seko", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"ル・アーヴル", clubEn:"Le Havre", prefectureJa:"大阪府", prefectureEn:"Osaka", prevClubJa:"グラスホッパー", prevClubEn:"Grasshopper", youthJa:"セレッソ大阪U-18", youthEn:"Cerezo Osaka U-18", jleagueJa:"セレッソ大阪", jleagueEn:"Cerezo Osaka", imageUrl:"https://www.nippon.com/ja/ncommon/contents/japan-data/3004061/3004061.jpg" },
                 { num:25, nameJa:"鈴木 淳之介", nameEn:"Junnosuke Suzuki", posCode:"DF", posJa:"ディフェンダー", posEn:"Defender", clubJa:"FCコペンハーゲン", clubEn:"FC Copenhagen", prefectureJa:"岐阜県", prefectureEn:"Gifu", prevClubJa:"ブランビー", prevClubEn:"Brondby", youthJa:"帝京大学可児高校", youthEn:"Teikyo University Kani HS", jleagueJa:"湘南ベルマーレ", jleagueEn:"Shonan Bellmare", imageUrl:"https://www.nippon.com/ja/ncommon/contents/japan-data/3004053/3004053.jpg" }
             ],
             MF: [
-                { num:6, nameJa:"遠藤 航", nameEn:"Wataru Endo", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"リバプール", clubEn:"Liverpool", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"シュツットガルト", prevClubEn:"VfB Stuttgart", youthJa:"湘南ベルマーレユース", youthEn:"Shonan Bellmare Youth", jleagueJa:"湘南ベルマーレ、浦和レッズ", jleagueEn:"Shonan Bellmare, Urawa Reds", imageUrl:"images/players/6.jpg" },
+                // 遠藤航 (Endo) を削除 → 町野修斗へ変更のためMFリスト更新
                 { num:7, nameJa:"田中 碧", nameEn:"Ao Tanaka", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"リーズ・ユナイテッド", clubEn:"Leeds United", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"デュッセルドルフ", prevClubEn:"Fortuna Dusseldorf", youthJa:"川崎フロンターレU-18", youthEn:"Kawasaki Frontale U-18", jleagueJa:"川崎フロンターレ", jleagueEn:"Kawasaki Frontale", imageUrl:"images/players/7.jpg" },
                 { num:8, nameJa:"久保 建英", nameEn:"Takefusa Kubo", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"レアル・ソシエダ", clubEn:"Real Sociedad", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"レアル・マドリード", prevClubEn:"Real Madrid", youthJa:"FC東京U-18", youthEn:"FC Tokyo U-18", jleagueJa:"FC東京、横浜F・マリノス", jleagueEn:"FC Tokyo, Yokohama F.Marinos", imageUrl:"images/players/8.jpg" },
                 { num:10, nameJa:"堂安 律", nameEn:"Ritsu Doan", posCode:"MF", posJa:"ミッドフィールダー", posEn:"Midfielder", clubJa:"アイントラハト・フランクフルト", clubEn:"Eintracht Frankfurt", prefectureJa:"兵庫県", prefectureEn:"Hyogo", prevClubJa:"SCフライブルク", prevClubEn:"SC Freiburg", youthJa:"ガンバ大阪ユース", youthEn:"Gamba Osaka Youth", jleagueJa:"ガンバ大阪", jleagueEn:"Gamba Osaka", imageUrl:"images/players/10.jpg" },
@@ -476,7 +476,9 @@
                 { num:18, nameJa:"上田 綺世", nameEn:"Ayase Ueda", posCode:"FW", posJa:"フォワード", posEn:"Forward", clubJa:"フェイエノールト", clubEn:"Feyenoord", prefectureJa:"茨城県", prefectureEn:"Ibaraki", prevClubJa:"セルクル・ブルージュ", prevClubEn:"Cercle Brugge", youthJa:"鹿島学園高校", youthEn:"Kashima Gakuen HS", jleagueJa:"鹿島アントラーズ", jleagueEn:"Kashima Antlers", imageUrl:"images/players/18.jpg" },
                 { num:19, nameJa:"小川 航基", nameEn:"Koki Ogawa", posCode:"FW", posJa:"フォワード", posEn:"Forward", clubJa:"NECナイメヘン", clubEn:"NEC Nijmegen", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"横浜FC", prevClubEn:"Yokohama FC", youthJa:"桐光学園高校", youthEn:"Tokogakuen HS", jleagueJa:"ジュビロ磐田、水戸、横浜FC", jleagueEn:"Jubilo Iwata, Mito, Yokohama FC", imageUrl:"images/players/19.jpg" },
                 { num:9, nameJa:"後藤 啓介", nameEn:"Keisuke Goto", posCode:"FW", posJa:"フォワード", posEn:"Forward", clubJa:"シント＝トロイデン", clubEn:"Sint-Truiden", prefectureJa:"静岡県", prefectureEn:"Shizuoka", prevClubJa:"アンデルレヒト", prevClubEn:"Anderlecht", youthJa:"ジュビロ磐田U-18", youthEn:"Jubilo Iwata U-18", jleagueJa:"ジュビロ磐田", jleagueEn:"Jubilo Iwata", imageUrl:"images/players/9.jpg" },
-                { num:26, nameJa:"塩貝 健人", nameEn:"Kento Shiogai", posCode:"FW", posJa:"フォワード", posEn:"Forward", clubJa:"VfLヴォルフスブルク", clubEn:"VfL Wolfsburg", prefectureJa:"東京都", prefectureEn:"Tokyo", prevClubJa:"NECナイメヘン", prevClubEn:"NEC Nijmegen", youthJa:"國學院大學久我山高校", youthEn:"Kokugakuin Univ. Kugayama HS", jleagueJa:"慶應大特別指定(横浜FM)", jleagueEn:"Keio Univ. (Yokohama FM)", imageUrl:"images/players/26.jpg" }
+                { num:26, nameJa:"塩貝 健人", nameEn:"Kento Shiogai", posCode:"FW", posJa:"フォワード", posEn:"Forward", clubJa:"VfLヴォルフスブルク", clubEn:"VfL Wolfsburg", prefectureJa:"東京都", prefectureEn:"Tokyo", prevClubJa:"NECナイメヘン", prevClubEn:"NEC Nijmegen", youthJa:"國學院大學久我山高校", youthEn:"Kokugakuin Univ. Kugayama HS", jleagueJa:"慶應大特別指定(横浜FM)", jleagueEn:"Keio Univ. (Yokohama FM)", imageUrl:"images/players/26.jpg" },
+                // ========== 新メンバー: 町野修斗 (遠藤航から変更) ==========
+                { num:27, nameJa:"町野 修斗", nameEn:"Shuto Machino", posCode:"FW", posJa:"フォワード", posEn:"Forward", clubJa:"ホルシュタイン・キール (ドイツ)", clubEn:"Holstein Kiel (Germany)", prefectureJa:"神奈川県", prefectureEn:"Kanagawa", prevClubJa:"湘南ベルマーレ", prevClubEn:"Shonan Bellmare", youthJa:"湘南ベルマーレユース", youthEn:"Shonan Bellmare Youth", jleagueJa:"湘南ベルマーレ", jleagueEn:"Shonan Bellmare", imageUrl:"images/players/machino.jpg" }
             ]
         };
 
@@ -540,7 +542,7 @@
 
         let currentLang = 'en';
         let currentTheme = 'dark';
-        let activePanel = 0; // 0:監督+GK, 1:DF, 2:MF, 3:FW
+        let activePanel = 0;
 
         const mainView = document.getElementById('main-view');
         const detailView = document.getElementById('detail-view');
@@ -559,7 +561,6 @@
             contactText.innerText = t.contact;
             langBtn.innerHTML = currentLang === 'en' ? t.langJa : t.langEn;
             themeBtn.innerHTML = currentTheme === 'dark' ? t.themeLight : t.themeDark;
-            // タブ文字更新
             document.getElementById('tab-0').innerText = t.tabCoachGK;
             document.getElementById('tab-1').innerText = t.tabDF;
             document.getElementById('tab-2').innerText = t.tabMF;
@@ -630,11 +631,9 @@
 
         function renderCarousel() {
             const t = UI_TEXTS[currentLang];
-            // カルーセル構造
             const html = `
                 <div class="carousel-container" id="carousel-container">
                     <div class="carousel-track" id="carousel-track">
-                        <!-- パネル0: 監督 + GK -->
                         <div class="carousel-panel" data-panel="0">
                             <div class="cards-list">
                                 <div class="section-title">${t.coachLabel}</div>
@@ -643,15 +642,12 @@
                                 <div id="gk-cards-area"></div>
                             </div>
                         </div>
-                        <!-- パネル1: DF -->
                         <div class="carousel-panel" data-panel="1">
                             <div class="cards-list" id="df-cards-area"></div>
                         </div>
-                        <!-- パネル2: MF -->
                         <div class="carousel-panel" data-panel="2">
                             <div class="cards-list" id="mf-cards-area"></div>
                         </div>
-                        <!-- パネル3: FW -->
                         <div class="carousel-panel" data-panel="3">
                             <div class="cards-list" id="fw-cards-area"></div>
                         </div>
@@ -660,35 +656,21 @@
             `;
             mainView.innerHTML = html;
             
-            // 監督カード追加
             const coachArea = document.getElementById('coach-card-area');
             if (coachArea) coachArea.appendChild(createCard(COACH, true));
             
-            // GK追加
             const gkArea = document.getElementById('gk-cards-area');
-            if (gkArea) {
-                PLAYERS.GK.forEach(p => gkArea.appendChild(createCard(p, false)));
-            }
+            if (gkArea) PLAYERS.GK.forEach(p => gkArea.appendChild(createCard(p, false)));
             
-            // DF追加
             const dfArea = document.getElementById('df-cards-area');
-            if (dfArea) {
-                PLAYERS.DF.forEach(p => dfArea.appendChild(createCard(p, false)));
-            }
+            if (dfArea) PLAYERS.DF.forEach(p => dfArea.appendChild(createCard(p, false)));
             
-            // MF追加
             const mfArea = document.getElementById('mf-cards-area');
-            if (mfArea) {
-                PLAYERS.MF.forEach(p => mfArea.appendChild(createCard(p, false)));
-            }
+            if (mfArea) PLAYERS.MF.forEach(p => mfArea.appendChild(createCard(p, false)));
             
-            // FW追加
             const fwArea = document.getElementById('fw-cards-area');
-            if (fwArea) {
-                PLAYERS.FW.forEach(p => fwArea.appendChild(createCard(p, false)));
-            }
+            if (fwArea) PLAYERS.FW.forEach(p => fwArea.appendChild(createCard(p, false)));
             
-            // カルーセル要素を取得
             carouselContainer = document.getElementById('carousel-container');
             if (carouselContainer) {
                 carouselContainer.addEventListener('scroll', () => {
@@ -700,7 +682,6 @@
                         updateActiveTab();
                     }
                 });
-                // 初期位置設定
                 carouselContainer.scrollLeft = activePanel * carouselContainer.clientWidth;
             }
         }
@@ -797,8 +778,7 @@
             document.getElementById('detail-back-btn').addEventListener('click', () => {
                 mainView.classList.remove('hidden');
                 detailView.classList.add('hidden');
-                renderCarousel(); // 再描画してカルーセル状態復元
-                // アクティブパネルを戻す
+                renderCarousel();
                 setTimeout(() => {
                     if (carouselContainer) carouselContainer.scrollLeft = carouselContainer.clientWidth * activePanel;
                 }, 50);
@@ -809,7 +789,6 @@
             setTheme('dark');
             updateUILanguage();
             renderCarousel();
-            // タブイベント
             tabs.forEach((tab, idx) => {
                 tab.addEventListener('click', () => switchPanel(idx));
             });
@@ -819,7 +798,6 @@
 
         init();
 
-        // PWA Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then(reg => {
