@@ -59,6 +59,7 @@
             color: var(--text-primary);
             line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .app-header {
@@ -116,75 +117,93 @@
             transform: scale(1.02);
         }
 
-        .main-container {
-            max-width: 1600px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
+        /* タブナビゲーション */
+        .tab-bar {
+            display: flex;
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 70px;
+            z-index: 99;
+            backdrop-filter: blur(8px);
         }
 
-        /* 3カラムレイアウト */
-        .three-columns {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            align-items: start;
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 1rem 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+            border-bottom: 3px solid transparent;
         }
 
-        /* スマホでは1列 */
-        @media (max-width: 900px) {
-            .three-columns {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
+        .tab.active {
+            color: var(--samurai-gold);
+            border-bottom-color: var(--samurai-gold);
         }
 
-        .column {
+        /* カルーセルコンテナ (横スクロール) */
+        .carousel-container {
+            width: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            /* スクロールバーを隠す (任意) */
+            scrollbar-width: thin;
+        }
+
+        .carousel-container::-webkit-scrollbar {
+            height: 6px;
+            background: var(--bg-secondary);
+        }
+
+        .carousel-container::-webkit-scrollbar-thumb {
+            background: var(--samurai-gold);
+            border-radius: 10px;
+        }
+
+        .carousel-track {
+            display: flex;
+            width: 100%;
+        }
+
+        .carousel-panel {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            padding: 1.5rem;
+            overflow-y: auto;
+            max-height: calc(100vh - 140px);
+        }
+
+        /* ポジショングループ内のカード一覧 (縦に並ぶ) */
+        .cards-list {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        /* ポジション内グループ */
-        .position-group {
-            background-color: var(--bg-secondary);
-            border-radius: 24px;
-            padding: 1.2rem;
-            border: 1px solid var(--border);
-        }
-
-        .group-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.2rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--samurai-gold);
-        }
-
-        .group-title {
+        .section-title {
             font-size: 1.3rem;
-            font-weight: bold;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--samurai-gold);
+            display: inline-block;
         }
 
-        .group-count {
-            background-color: var(--samurai-gold);
-            color: #0a1428;
-            padding: 0.2rem 0.7rem;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        /* カードスタイル */
+        /* カードスタイル (詳細画面と共通) */
         .player-card {
             background-color: var(--bg-card);
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             border: 1px solid var(--border);
-            margin-bottom: 1rem;
         }
 
         .player-card:hover {
@@ -192,7 +211,7 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.25);
         }
 
-        .player-card.coach-card {
+        .coach-card {
             border-top: 3px solid var(--coach-badge);
         }
 
@@ -262,7 +281,7 @@
             margin-top: 0.4rem;
         }
 
-        /* 詳細画面 */
+        /* 詳細画面 (以前と同じ) */
         .detail-container {
             max-width: 800px;
             margin: 2rem auto;
@@ -349,7 +368,7 @@
         .app-footer {
             background-color: var(--header-bg);
             padding: 2rem 1.5rem;
-            margin-top: 3rem;
+            margin-top: 2rem;
             text-align: center;
             border-top: 1px solid var(--border);
         }
@@ -383,6 +402,14 @@
             </div>
         </div>
     </header>
+
+    <!-- タブ -->
+    <div class="tab-bar" id="tab-bar">
+        <div class="tab" data-index="0" id="tab-0">👤 + 🧤</div>
+        <div class="tab" data-index="1" id="tab-1">🛡️ DF</div>
+        <div class="tab" data-index="2" id="tab-2">⚙️ MF</div>
+        <div class="tab" data-index="3" id="tab-3">⚽ FW</div>
+    </div>
 
     <main id="app-root">
         <div id="main-view"></div>
@@ -459,16 +486,17 @@
                 siteTitle: "⚽ SAMURAI BLUE",
                 siteSub: "Japan National Team 2026",
                 contact: "Contact us",
-                back: "← Back to Main",
-                groupCoach: "Head Coach",
-                groupGK: "Goalkeepers",
-                groupDF: "Defenders",
-                groupMF: "Midfielders",
-                groupFW: "Forwards",
+                back: "← Back to Players",
                 themeLight: "☀️ Light",
                 themeDark: "🌙 Dark",
                 langJa: "🇯🇵 日本語",
                 langEn: "🇬🇧 English",
+                tabCoachGK: "👤 + 🧤",
+                tabDF: "🛡️ DF",
+                tabMF: "⚙️ MF",
+                tabFW: "⚽ FW",
+                coachLabel: "Head Coach",
+                gkLabel: "Goalkeepers",
                 detailLabels: {
                     position: "Position",
                     club: "Current Club",
@@ -486,15 +514,16 @@
                 siteSub: "日本代表 2026",
                 contact: "お問い合わせ",
                 back: "← 一覧に戻る",
-                groupCoach: "監督",
-                groupGK: "ゴールキーパー",
-                groupDF: "ディフェンダー",
-                groupMF: "ミッドフィールダー",
-                groupFW: "フォワード",
                 themeLight: "☀️ ライト",
                 themeDark: "🌙 ダーク",
                 langJa: "🇯🇵 日本語",
                 langEn: "🇬🇧 English",
+                tabCoachGK: "👤 監督 + 🧤 GK",
+                tabDF: "🛡️ DF",
+                tabMF: "⚙️ MF",
+                tabFW: "⚽ FW",
+                coachLabel: "監督",
+                gkLabel: "ゴールキーパー",
                 detailLabels: {
                     position: "役職",
                     club: "現所属クラブ",
@@ -511,6 +540,7 @@
 
         let currentLang = 'en';
         let currentTheme = 'dark';
+        let activePanel = 0; // 0:監督+GK, 1:DF, 2:MF, 3:FW
 
         const mainView = document.getElementById('main-view');
         const detailView = document.getElementById('detail-view');
@@ -519,6 +549,8 @@
         const siteTitle = document.getElementById('site-title');
         const siteSub = document.getElementById('site-sub');
         const contactText = document.getElementById('contact-text');
+        const tabs = document.querySelectorAll('.tab');
+        let carouselContainer = null;
 
         function updateUILanguage() {
             const t = UI_TEXTS[currentLang];
@@ -527,13 +559,18 @@
             contactText.innerText = t.contact;
             langBtn.innerHTML = currentLang === 'en' ? t.langJa : t.langEn;
             themeBtn.innerHTML = currentTheme === 'dark' ? t.themeLight : t.themeDark;
+            // タブ文字更新
+            document.getElementById('tab-0').innerText = t.tabCoachGK;
+            document.getElementById('tab-1').innerText = t.tabDF;
+            document.getElementById('tab-2').innerText = t.tabMF;
+            document.getElementById('tab-3').innerText = t.tabFW;
         }
 
         function setLanguage(lang) {
             currentLang = lang;
             updateUILanguage();
             if (!mainView.classList.contains('hidden')) {
-                renderMainList();
+                renderCarousel();
             } else {
                 if (window._currentDetailItem) renderDetail(window._currentDetailItem.item, window._currentDetailItem.isCoach);
             }
@@ -562,11 +599,10 @@
             }
         }
 
-        function createCard(item, isCoach = false, positionGroup = null) {
+        function createCard(item, isCoach = false) {
             const name = currentLang === 'ja' ? item.nameJa : item.nameEn;
             const nameSub = currentLang === 'ja' ? item.nameEn : item.nameJa;
             let pos, club, badgeClass;
-            
             if (isCoach) {
                 pos = currentLang === 'ja' ? item.roleJa : item.roleEn;
                 club = "";
@@ -576,7 +612,6 @@
                 club = currentLang === 'ja' ? item.clubJa : item.clubEn;
                 badgeClass = `pos-${item.posCode.toLowerCase()}`;
             }
-            
             const card = document.createElement('div');
             card.className = `player-card ${isCoach ? 'coach-card' : ''}`;
             card.innerHTML = `
@@ -593,105 +628,100 @@
             return card;
         }
 
-        function renderMainList() {
+        function renderCarousel() {
             const t = UI_TEXTS[currentLang];
-            
-            const coachCount = 1;
-            const gkCount = PLAYERS.GK.length;
-            const dfCount = PLAYERS.DF.length;
-            const mfCount = PLAYERS.MF.length;
-            const fwCount = PLAYERS.FW.length;
-            
-            mainView.innerHTML = `
-                <div class="main-container">
-                    <div class="three-columns">
-                        <!-- 左カラム: 監督 + GK -->
-                        <div class="column">
-                            <div class="position-group">
-                                <div class="group-header">
-                                    <span class="group-title">${t.groupCoach}</span>
-                                    <span class="group-count">${coachCount}</span>
-                                </div>
-                                <div id="coach-container"></div>
-                            </div>
-                            <div class="position-group">
-                                <div class="group-header">
-                                    <span class="group-title">${t.groupGK}</span>
-                                    <span class="group-count">${gkCount}</span>
-                                </div>
-                                <div id="gk-container"></div>
+            // カルーセル構造
+            const html = `
+                <div class="carousel-container" id="carousel-container">
+                    <div class="carousel-track" id="carousel-track">
+                        <!-- パネル0: 監督 + GK -->
+                        <div class="carousel-panel" data-panel="0">
+                            <div class="cards-list">
+                                <div class="section-title">${t.coachLabel}</div>
+                                <div id="coach-card-area"></div>
+                                <div class="section-title" style="margin-top: 1.5rem;">${t.gkLabel}</div>
+                                <div id="gk-cards-area"></div>
                             </div>
                         </div>
-                        
-                        <!-- 中央カラム: DF + MF -->
-                        <div class="column">
-                            <div class="position-group">
-                                <div class="group-header">
-                                    <span class="group-title">${t.groupDF}</span>
-                                    <span class="group-count">${dfCount}</span>
-                                </div>
-                                <div id="df-container"></div>
-                            </div>
-                            <div class="position-group">
-                                <div class="group-header">
-                                    <span class="group-title">${t.groupMF}</span>
-                                    <span class="group-count">${mfCount}</span>
-                                </div>
-                                <div id="mf-container"></div>
-                            </div>
+                        <!-- パネル1: DF -->
+                        <div class="carousel-panel" data-panel="1">
+                            <div class="cards-list" id="df-cards-area"></div>
                         </div>
-                        
-                        <!-- 右カラム: FW -->
-                        <div class="column">
-                            <div class="position-group">
-                                <div class="group-header">
-                                    <span class="group-title">${t.groupFW}</span>
-                                    <span class="group-count">${fwCount}</span>
-                                </div>
-                                <div id="fw-container"></div>
-                            </div>
+                        <!-- パネル2: MF -->
+                        <div class="carousel-panel" data-panel="2">
+                            <div class="cards-list" id="mf-cards-area"></div>
+                        </div>
+                        <!-- パネル3: FW -->
+                        <div class="carousel-panel" data-panel="3">
+                            <div class="cards-list" id="fw-cards-area"></div>
                         </div>
                     </div>
                 </div>
             `;
+            mainView.innerHTML = html;
             
             // 監督カード追加
-            const coachContainer = document.getElementById('coach-container');
-            if (coachContainer) {
-                coachContainer.appendChild(createCard(COACH, true));
-            }
+            const coachArea = document.getElementById('coach-card-area');
+            if (coachArea) coachArea.appendChild(createCard(COACH, true));
             
             // GK追加
-            const gkContainer = document.getElementById('gk-container');
-            if (gkContainer) {
-                PLAYERS.GK.forEach(p => {
-                    gkContainer.appendChild(createCard(p, false));
-                });
+            const gkArea = document.getElementById('gk-cards-area');
+            if (gkArea) {
+                PLAYERS.GK.forEach(p => gkArea.appendChild(createCard(p, false)));
             }
             
             // DF追加
-            const dfContainer = document.getElementById('df-container');
-            if (dfContainer) {
-                PLAYERS.DF.forEach(p => {
-                    dfContainer.appendChild(createCard(p, false));
-                });
+            const dfArea = document.getElementById('df-cards-area');
+            if (dfArea) {
+                PLAYERS.DF.forEach(p => dfArea.appendChild(createCard(p, false)));
             }
             
             // MF追加
-            const mfContainer = document.getElementById('mf-container');
-            if (mfContainer) {
-                PLAYERS.MF.forEach(p => {
-                    mfContainer.appendChild(createCard(p, false));
-                });
+            const mfArea = document.getElementById('mf-cards-area');
+            if (mfArea) {
+                PLAYERS.MF.forEach(p => mfArea.appendChild(createCard(p, false)));
             }
             
             // FW追加
-            const fwContainer = document.getElementById('fw-container');
-            if (fwContainer) {
-                PLAYERS.FW.forEach(p => {
-                    fwContainer.appendChild(createCard(p, false));
+            const fwArea = document.getElementById('fw-cards-area');
+            if (fwArea) {
+                PLAYERS.FW.forEach(p => fwArea.appendChild(createCard(p, false)));
+            }
+            
+            // カルーセル要素を取得
+            carouselContainer = document.getElementById('carousel-container');
+            if (carouselContainer) {
+                carouselContainer.addEventListener('scroll', () => {
+                    const scrollLeft = carouselContainer.scrollLeft;
+                    const panelWidth = carouselContainer.clientWidth;
+                    const newIndex = Math.round(scrollLeft / panelWidth);
+                    if (newIndex !== activePanel) {
+                        activePanel = newIndex;
+                        updateActiveTab();
+                    }
+                });
+                // 初期位置設定
+                carouselContainer.scrollLeft = activePanel * carouselContainer.clientWidth;
+            }
+        }
+
+        function updateActiveTab() {
+            tabs.forEach((tab, idx) => {
+                if (idx === activePanel) tab.classList.add('active');
+                else tab.classList.remove('active');
+            });
+        }
+
+        function switchPanel(index) {
+            if (index === activePanel) return;
+            activePanel = index;
+            if (carouselContainer) {
+                carouselContainer.scrollTo({
+                    left: carouselContainer.clientWidth * activePanel,
+                    behavior: 'smooth'
                 });
             }
+            updateActiveTab();
         }
 
         function showDetail(item, isCoach = false) {
@@ -707,20 +737,16 @@
             const labels = t.detailLabels;
             const name = currentLang === 'ja' ? p.nameJa : p.nameEn;
             const nameSub = currentLang === 'ja' ? p.nameEn : p.nameJa;
-            
             if (isCoach) {
                 const role = currentLang === 'ja' ? p.roleJa : p.roleEn;
                 const prefecture = currentLang === 'ja' ? p.prefectureJa : p.prefectureEn;
                 const career = currentLang === 'ja' ? p.careerJa : p.careerEn;
                 const achievements = currentLang === 'ja' ? p.majorAchievementsJa : p.majorAchievementsEn;
                 const description = currentLang === 'ja' ? p.descriptionJa : p.descriptionEn;
-                
                 detailView.innerHTML = `
                     <div class="detail-container">
                         <div class="detail-card">
-                            <div class="detail-img">
-                                ${renderPlayerImage(p.imageUrl, name)}
-                            </div>
+                            <div class="detail-img">${renderPlayerImage(p.imageUrl, name)}</div>
                             <div class="detail-header">
                                 <div class="detail-name">${name}</div>
                                 <div class="detail-name-en">${nameSub}</div>
@@ -745,13 +771,10 @@
                 const youth = currentLang === 'ja' ? p.youthJa : p.youthEn;
                 const jleague = currentLang === 'ja' ? p.jleagueJa : p.jleagueEn;
                 const badgeClass = `pos-${p.posCode.toLowerCase()}`;
-                
                 detailView.innerHTML = `
                     <div class="detail-container">
                         <div class="detail-card">
-                            <div class="detail-img">
-                                ${renderPlayerImage(p.imageUrl, name)}
-                            </div>
+                            <div class="detail-img">${renderPlayerImage(p.imageUrl, name)}</div>
                             <div class="detail-header">
                                 <div class="detail-number">#${p.num}</div>
                                 <div class="detail-name">${name}</div>
@@ -771,25 +794,32 @@
                     </div>
                 `;
             }
-            
             document.getElementById('detail-back-btn').addEventListener('click', () => {
                 mainView.classList.remove('hidden');
                 detailView.classList.add('hidden');
-                renderMainList();
+                renderCarousel(); // 再描画してカルーセル状態復元
+                // アクティブパネルを戻す
+                setTimeout(() => {
+                    if (carouselContainer) carouselContainer.scrollLeft = carouselContainer.clientWidth * activePanel;
+                }, 50);
             });
         }
 
         function init() {
             setTheme('dark');
             updateUILanguage();
-            renderMainList();
+            renderCarousel();
+            // タブイベント
+            tabs.forEach((tab, idx) => {
+                tab.addEventListener('click', () => switchPanel(idx));
+            });
             langBtn.addEventListener('click', () => setLanguage(currentLang === 'en' ? 'ja' : 'en'));
             themeBtn.addEventListener('click', toggleTheme);
         }
 
         init();
 
-        // PWA Service Worker (パス指定なし)
+        // PWA Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then(reg => {
